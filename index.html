@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="世界杯参赛球队详细介绍：历史战绩、球星、战术风格与足球文化。"
+    />
+    <title>世界杯球队志 | World Cup Teams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="#" class="logo" data-action="home">
+          <span class="logo-icon" aria-hidden="true">⚽</span>
+          <span>世界杯球队志</span>
+        </a>
+        <nav class="nav" aria-label="主导航">
+          <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+            菜单
+          </button>
+          <ul id="nav-menu" class="nav-list">
+            <li><a href="#teams">球队索引</a></li>
+            <li><a href="#about">关于本站</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <p class="hero-kicker">FIFA World Cup</p>
+          <h1>探索世界杯舞台上的经典劲旅</h1>
+          <p class="hero-lead">
+            从五星巴西到潘帕斯雄鹰，从欧洲豪门到新兴力量——每支球队都有自己的故事、荣耀与足球哲学。本站汇总多支代表性国家队的深度介绍，便于学习与分享。
+          </p>
+          <div class="hero-search">
+            <label for="q" class="visually-hidden">搜索球队</label>
+            <input
+              type="search"
+              id="q"
+              placeholder="按中文名、英文名或联合会搜索…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="hero-filters" id="conf-filters" role="group" aria-label="按联合会筛选"></div>
+        </div>
+      </section>
+
+      <section id="teams" class="section teams-section">
+        <div class="wrap">
+          <h2 class="section-title">球队索引</h2>
+          <p class="section-desc">点击卡片查看完整介绍。数据为足球文化向整理，非实时积分榜。</p>
+          <div id="team-grid" class="team-grid"></div>
+          <p id="empty-state" class="empty-state hidden">没有匹配的球队，请尝试其他关键词或筛选条件。</p>
+        </div>
+      </section>
+
+      <section id="about" class="section about-section">
+        <div class="wrap about-inner">
+          <h2 class="section-title">关于本站</h2>
+          <p>
+            本站为纯静态页面，可托管在
+            <a href="https://pages.github.com/" rel="noopener noreferrer" target="_blank">GitHub Pages</a>
+            或其他任意静态托管服务。内容由公开资料与足球史常识整理而成，仅供球迷交流与教育用途。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>© <span id="year"></span> 世界杯球队志 · 静态演示站点</p>
+      </div>
+    </footer>
+
+    <dialog id="detail-modal" class="modal" aria-labelledby="modal-title">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-panel" role="document">
+        <button type="button" class="modal-close" data-close-modal aria-label="关闭">×</button>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </dialog>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
