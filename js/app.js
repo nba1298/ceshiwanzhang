@@ -7,6 +7,24 @@ const CONF_LABELS = {
   CAF: "非洲（CAF）",
 };
 
+/** Twemoji 静态图：避免 Windows 把国旗类 emoji 显示成 BR、AR 等字母，动物图标也更统一 */
+const TWEMOJI_BASE =
+  "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72";
+
+function emojiToTwemojiPath(emoji) {
+  if (!emoji || typeof emoji !== "string") return "";
+  return [...emoji]
+    .map((ch) => ch.codePointAt(0).toString(16))
+    .join("-");
+}
+
+function mascotImgHtml(emoji) {
+  const path = emojiToTwemojiPath(emoji);
+  if (!path) return "";
+  const src = `${TWEMOJI_BASE}/${path}.png`;
+  return `<img class="twemoji-img" src="${src}" alt="" width="40" height="40" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`;
+}
+
 let teams = [];
 let activeConf = "ALL";
 let searchQuery = "";
@@ -69,7 +87,7 @@ function renderGrid() {
       team.worldCupWins > 0 ? `${team.worldCupWins} 次夺冠` : "未夺冠";
 
     card.innerHTML = `
-      <div class="card-flag" aria-hidden="true">${team.flag}</div>
+      <div class="card-flag" aria-hidden="true">${mascotImgHtml(team.flag)}</div>
       <h3 class="card-name">${team.nameZh}</h3>
       <p class="card-name-en">${team.nameEn}</p>
       <div class="card-meta">
@@ -94,7 +112,7 @@ function openModal(team) {
 
   body.innerHTML = `
     <div class="modal-header">
-      <span class="modal-flag" aria-hidden="true">${team.flag}</span>
+      <span class="modal-flag" aria-hidden="true">${mascotImgHtml(team.flag)}</span>
       <div class="modal-title-block">
         <h2 id="modal-title">${team.nameZh}（${team.nameEn}）</h2>
         <p>${team.nickname} · ${team.confederationZh}</p>
@@ -156,7 +174,9 @@ function closeModal() {
 
 async function loadTeams() {
   const url = new URL("data/teams.json", window.location.href);
-  const res = await fetch(url);
+  // 避免浏览器/静态服务器长期缓存旧 JSON，导致改数据后刷新仍显示旧图标
+  url.searchParams.set("v", "3");
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("无法加载球队数据");
   teams = await res.json();
 }
