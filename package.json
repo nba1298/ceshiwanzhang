@@ -1,5 +1,16 @@
 {
+  "name": "ceshiwanzhang",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve .",
+    "insects": "npx --yes serve . -l 3456",
+    "insects:build-bulk": "node insects/scripts/build-bulk.mjs",
+    "taobao:dev": "node taobao-lianmeng/server.js"
+  },
   "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "serve": "^14.2.6"
   }
 }

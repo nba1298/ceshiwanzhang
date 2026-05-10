@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname;
+        var dir = path.endsWith("/")
+          ? path
+          : /\.html?$/i.test(path)
+            ? path.replace(/[^/]+$/, "")
+            : path + "/";
+        var b = document.createElement("base");
+        b.href = dir;
+        document.head.insertBefore(b, document.currentScript);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>昆虫图鉴 — 图片与讲解</title>
+    <meta
+      name="description"
+      content="浏览多种昆虫的高清图片与中文科普讲解：分类、习性与保护提示。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#insect-grid">跳到昆虫列表</a>
+    <header class="site-header">
+      <h1>昆虫图鉴</h1>
+      <p>
+        含<strong>精选条目</strong>与<strong>批量扩展物种</strong>（约 200 种），配有图片与讲解摘要；精选条目的部分含<strong>本地短视频</strong>。打开详情后可用<strong>中文语音朗读习性讲解</strong>（本机 TTS）。扩展条目配图来自维基媒体缩略图，需能访问外网。
+      </p>
+      <div class="toolbar" role="search">
+        <label class="sr-only" for="insect-search">搜索昆虫</label>
+        <input
+          type="search"
+          id="insect-search"
+          class="insect-search"
+          placeholder="按中文名、学名或摘要关键字筛选…"
+          autocomplete="off"
+        />
+        <p id="insect-count" class="insect-count" aria-live="polite"></p>
+      </div>
+    </header>
+    <main>
+      <div id="insect-grid" class="grid" role="list" aria-label="昆虫列表"></div>
+    </main>
+    <footer class="site-footer">
+      教育科普用途 · <strong>精选条目</strong>的配图与视频多为本地文件；<strong>扩展条目</strong>约 200 种使用在线缩略图（upload.wikimedia.org）。转载或商用请遵循各媒体在维基上的授权说明。
+    </footer>
+
+    <div
+      id="modal"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title"></h2>
+          <button type="button" id="modal-close" class="modal-close" aria-label="关闭">
+            ×
+          </button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
